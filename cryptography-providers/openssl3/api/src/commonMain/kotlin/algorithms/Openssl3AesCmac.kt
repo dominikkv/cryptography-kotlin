@@ -16,7 +16,7 @@ import kotlin.experimental.*
 import kotlin.native.ref.*
 
 @OptIn(ExperimentalNativeApi::class)
-internal object Openssl3AesCmac : AES.CMAC, BaseAes<AES.CMAC.Key>(AES.CMAC) {
+internal object Openssl3AesCmac : AES.CMAC, BaseAes<AES.CMAC.Key>() {
     val mac = checkError(EVP_MAC_fetch(null, "CMAC", null))
 
     // is it needed at all for `object`?

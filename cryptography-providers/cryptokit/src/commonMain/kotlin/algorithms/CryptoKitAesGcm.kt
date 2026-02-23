@@ -14,7 +14,7 @@ import dev.whyoleg.cryptography.providers.base.operations.*
 import dev.whyoleg.cryptography.providers.cryptokit.internal.*
 import dev.whyoleg.cryptography.providers.cryptokit.internal.swift.DwcCryptoKitInterop.*
 
-internal object CryptoKitAesGcm : AES.GCM, BaseAes<AES.GCM.Key>(AES.GCM) {
+internal object CryptoKitAesGcm : AES.GCM, BaseAes<AES.GCM.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.GCM.Key = AesGcmKey(rawKey)
 
     private class AesGcmKey(key: ByteArray) : AES.GCM.Key, BaseKey(key) {

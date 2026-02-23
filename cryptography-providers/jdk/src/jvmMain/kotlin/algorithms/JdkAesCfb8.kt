@@ -12,7 +12,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesCfb8(
     private val state: JdkCryptographyState,
-) : AES.CFB8, BaseAes<AES.CFB8.Key>(AES.CFB8) {
+) : AES.CFB8, BaseAes<AES.CFB8.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CFB8.Key = AesCfb8Key(rawKey)
 
     private inner class AesCfb8Key(rawKey: ByteArray) : AES.CFB8.Key, BaseKey(rawKey) {

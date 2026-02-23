@@ -87,10 +87,7 @@ abstract interface dev.whyoleg.cryptography.providers.base.operations/CipherFunc
 }
 
 abstract class <#A: dev.whyoleg.cryptography.algorithms/AES.Key> dev.whyoleg.cryptography.providers.base.algorithms/BaseAes : dev.whyoleg.cryptography.algorithms/AES<#A> { // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes|null[0]
-    constructor <init>(dev.whyoleg.cryptography/CryptographyAlgorithmId<*>) // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.<init>|<init>(dev.whyoleg.cryptography.CryptographyAlgorithmId<*>){}[0]
-
-    final val algorithmId // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.algorithmId|{}algorithmId[0]
-        final fun <get-algorithmId>(): dev.whyoleg.cryptography/CryptographyAlgorithmId<*> // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.algorithmId.<get-algorithmId>|<get-algorithmId>(){}[0]
+    constructor <init>() // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.<init>|<init>(){}[0]
 
     abstract fun wrapKey(kotlin/ByteArray): #A // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.wrapKey|wrapKey(kotlin.ByteArray){}[0]
     final fun keyDecoder(): dev.whyoleg.cryptography.materials/Decoder<dev.whyoleg.cryptography.algorithms/AES.Key.Format, #A> // dev.whyoleg.cryptography.providers.base.algorithms/BaseAes.keyDecoder|keyDecoder(){}[0]

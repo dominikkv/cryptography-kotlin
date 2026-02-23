@@ -13,7 +13,7 @@ import dev.whyoleg.cryptography.providers.openssl3.operations.*
 import kotlin.experimental.*
 import kotlin.native.ref.*
 
-internal object Openssl3AesOfb : AES.OFB, BaseAes<AES.OFB.Key>(AES.OFB) {
+internal object Openssl3AesOfb : AES.OFB, BaseAes<AES.OFB.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.OFB.Key = AesOfbKey(rawKey)
 
     private class AesOfbKey(key: ByteArray) : AES.OFB.Key, BaseKey(key) {

@@ -14,7 +14,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesEcb(
     private val state: JdkCryptographyState,
-) : AES.ECB, BaseAes<AES.ECB.Key>(AES.ECB) {
+) : AES.ECB, BaseAes<AES.ECB.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.ECB.Key = AesEcbKey(rawKey)
 
     private inner class AesEcbKey(rawKey: ByteArray) : AES.ECB.Key, BaseKey(rawKey) {

@@ -11,7 +11,7 @@ import dev.whyoleg.cryptography.providers.base.algorithms.*
 import dev.whyoleg.cryptography.providers.base.operations.*
 import platform.CoreCrypto.*
 
-internal object CCAesEcb : BaseAes<AES.ECB.Key>(AES.ECB), AES.ECB {
+internal object CCAesEcb : BaseAes<AES.ECB.Key>(), AES.ECB {
     override fun wrapKey(rawKey: ByteArray): AES.ECB.Key = AesEcbKey(rawKey)
 
     private class AesEcbKey(key: ByteArray) : AES.ECB.Key, BaseKey(key) {

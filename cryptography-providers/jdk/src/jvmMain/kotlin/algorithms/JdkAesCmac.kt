@@ -13,7 +13,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesCmac(
     private val state: JdkCryptographyState,
-) : AES.CMAC, BaseAes<AES.CMAC.Key>(AES.CMAC) {
+) : AES.CMAC, BaseAes<AES.CMAC.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CMAC.Key = AesCmacKey(rawKey)
 
     private inner class AesCmacKey(rawKey: ByteArray) : AES.CMAC.Key, BaseKey(rawKey) {

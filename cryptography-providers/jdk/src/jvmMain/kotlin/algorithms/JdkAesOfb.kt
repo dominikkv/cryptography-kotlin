@@ -12,7 +12,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesOfb(
     private val state: JdkCryptographyState,
-) : AES.OFB, BaseAes<AES.OFB.Key>(AES.OFB) {
+) : AES.OFB, BaseAes<AES.OFB.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.OFB.Key = AesOfbKey(rawKey)
 
     private inner class AesOfbKey(rawKey: ByteArray) : AES.OFB.Key, BaseKey(rawKey) {

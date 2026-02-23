@@ -16,7 +16,7 @@ import kotlinx.cinterop.*
 import kotlin.experimental.*
 import kotlin.native.ref.*
 
-internal object Openssl3AesEcb : AES.ECB, BaseAes<AES.ECB.Key>(AES.ECB) {
+internal object Openssl3AesEcb : AES.ECB, BaseAes<AES.ECB.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.ECB.Key = AesEcbKey(rawKey)
 
     private class AesEcbKey(key: ByteArray) : AES.ECB.Key, BaseKey(key) {

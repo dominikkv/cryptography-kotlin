@@ -12,7 +12,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesCbc(
     private val state: JdkCryptographyState,
-) : AES.CBC, BaseAes<AES.CBC.Key>(AES.CBC) {
+) : AES.CBC, BaseAes<AES.CBC.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CBC.Key = AesCbcKey(rawKey)
 
     private inner class AesCbcKey(rawKey: ByteArray) : AES.CBC.Key, BaseKey(rawKey) {

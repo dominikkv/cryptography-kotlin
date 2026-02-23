@@ -15,7 +15,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesCcm(
     private val state: JdkCryptographyState,
-) : AES.CCM, BaseAes<AES.CCM.Key>(AES.CCM) {
+) : AES.CCM, BaseAes<AES.CCM.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CCM.Key = AesCcmKey(rawKey)
 
     private inner class AesCcmKey(rawKey: ByteArray) : AES.CCM.Key, BaseKey(rawKey) {

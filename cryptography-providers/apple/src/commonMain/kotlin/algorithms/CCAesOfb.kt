@@ -9,7 +9,7 @@ import dev.whyoleg.cryptography.operations.*
 import dev.whyoleg.cryptography.providers.base.algorithms.*
 import platform.CoreCrypto.*
 
-internal object CCAesOfb : BaseAes<AES.OFB.Key>(AES.OFB), AES.OFB {
+internal object CCAesOfb : BaseAes<AES.OFB.Key>(), AES.OFB {
     override fun wrapKey(rawKey: ByteArray): AES.OFB.Key = AesOfbKey(rawKey)
 
     private class AesOfbKey(key: ByteArray) : AES.OFB.Key, BaseKey(key) {

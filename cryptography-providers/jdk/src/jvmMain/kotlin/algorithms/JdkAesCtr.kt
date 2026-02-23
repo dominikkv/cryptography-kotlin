@@ -12,7 +12,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesCtr(
     private val state: JdkCryptographyState,
-) : AES.CTR, BaseAes<AES.CTR.Key>(AES.CTR) {
+) : AES.CTR, BaseAes<AES.CTR.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CTR.Key = AesCtrKey(rawKey)
 
     private inner class AesCtrKey(rawKey: ByteArray) : AES.CTR.Key, BaseKey(rawKey) {

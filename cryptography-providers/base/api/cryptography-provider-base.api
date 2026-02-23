@@ -5,8 +5,7 @@ public final class dev/whyoleg/cryptography/providers/base/BytesKt {
 }
 
 public abstract class dev/whyoleg/cryptography/providers/base/algorithms/BaseAes : dev/whyoleg/cryptography/algorithms/AES {
-	public fun <init> (Ldev/whyoleg/cryptography/CryptographyAlgorithmId;)V
-	protected final fun getAlgorithmId ()Ldev/whyoleg/cryptography/CryptographyAlgorithmId;
+	public fun <init> ()V
 	public final fun keyDecoder ()Ldev/whyoleg/cryptography/materials/Decoder;
 	public final fun keyGenerator-6q1zMKY (I)Ldev/whyoleg/cryptography/operations/KeyGenerator;
 	protected abstract fun wrapKey ([B)Ldev/whyoleg/cryptography/algorithms/AES$Key;

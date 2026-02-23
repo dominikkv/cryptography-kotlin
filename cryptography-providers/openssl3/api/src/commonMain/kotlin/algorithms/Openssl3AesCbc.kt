@@ -14,7 +14,7 @@ import dev.whyoleg.cryptography.providers.openssl3.operations.*
 import kotlin.experimental.*
 import kotlin.native.ref.*
 
-internal object Openssl3AesCbc : AES.CBC, BaseAes<AES.CBC.Key>(AES.CBC) {
+internal object Openssl3AesCbc : AES.CBC, BaseAes<AES.CBC.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CBC.Key = AesCbcKey(rawKey)
 
     private class AesCbcKey(key: ByteArray) : AES.CBC.Key, BaseKey(key) {

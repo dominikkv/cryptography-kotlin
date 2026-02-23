@@ -15,7 +15,7 @@ import javax.crypto.spec.*
 
 internal class JdkAesGcm(
     private val state: JdkCryptographyState,
-) : AES.GCM, BaseAes<AES.GCM.Key>(AES.GCM) {
+) : AES.GCM, BaseAes<AES.GCM.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.GCM.Key = AesGcmKey(rawKey)
 
     private inner class AesGcmKey(rawKey: ByteArray) : AES.GCM.Key, BaseKey(rawKey) {

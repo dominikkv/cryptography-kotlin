@@ -17,7 +17,7 @@ import platform.posix.*
 import kotlin.experimental.*
 import kotlin.native.ref.*
 
-internal object Openssl3AesCcm : AES.CCM, BaseAes<AES.CCM.Key>(AES.CCM) {
+internal object Openssl3AesCcm : AES.CCM, BaseAes<AES.CCM.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CCM.Key = AesCcmKey(rawKey)
 
     private class AesCcmKey(key: ByteArray) : AES.CCM.Key, BaseKey(key) {

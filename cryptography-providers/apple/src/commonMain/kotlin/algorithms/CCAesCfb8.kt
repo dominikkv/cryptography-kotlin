@@ -9,7 +9,7 @@ import dev.whyoleg.cryptography.operations.*
 import dev.whyoleg.cryptography.providers.base.algorithms.*
 import platform.CoreCrypto.*
 
-internal object CCAesCfb8 : BaseAes<AES.CFB8.Key>(AES.CFB8), AES.CFB8 {
+internal object CCAesCfb8 : BaseAes<AES.CFB8.Key>(), AES.CFB8 {
     override fun wrapKey(rawKey: ByteArray): AES.CFB8.Key = AesCfb8Key(rawKey)
 
     private class AesCfb8Key(key: ByteArray) : AES.CFB8.Key, BaseKey(key) {

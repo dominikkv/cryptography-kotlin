@@ -9,7 +9,7 @@ import dev.whyoleg.cryptography.operations.*
 import dev.whyoleg.cryptography.providers.base.algorithms.*
 import platform.CoreCrypto.*
 
-internal object CCAesCtr : BaseAes<AES.CTR.Key>(AES.CTR), AES.CTR {
+internal object CCAesCtr : BaseAes<AES.CTR.Key>(), AES.CTR {
     override fun wrapKey(rawKey: ByteArray): AES.CTR.Key = AesCtrKey(rawKey)
 
     private class AesCtrKey(key: ByteArray) : AES.CTR.Key, BaseKey(key) {

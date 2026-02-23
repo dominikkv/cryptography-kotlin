@@ -13,7 +13,7 @@ import dev.whyoleg.cryptography.providers.openssl3.operations.*
 import kotlin.experimental.*
 import kotlin.native.ref.*
 
-internal object Openssl3AesCtr : AES.CTR, BaseAes<AES.CTR.Key>(AES.CTR) {
+internal object Openssl3AesCtr : AES.CTR, BaseAes<AES.CTR.Key>() {
     override fun wrapKey(rawKey: ByteArray): AES.CTR.Key = AesCtrKey(rawKey)
 
     private class AesCtrKey(key: ByteArray) : AES.CTR.Key, BaseKey(key) {

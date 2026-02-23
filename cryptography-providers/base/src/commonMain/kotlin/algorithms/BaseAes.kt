@@ -11,9 +11,7 @@ import dev.whyoleg.cryptography.materials.*
 import dev.whyoleg.cryptography.operations.*
 
 @CryptographyProviderApi
-public abstract class BaseAes<K : AES.Key>(
-    protected val algorithmId: CryptographyAlgorithmId<*>,
-) : AES<K> {
+public abstract class BaseAes<K : AES.Key> : AES<K> {
     protected abstract fun wrapKey(rawKey: ByteArray): K
 
     final override fun keyDecoder(): Decoder<AES.Key.Format, K> = BaseKeyDecoder()
