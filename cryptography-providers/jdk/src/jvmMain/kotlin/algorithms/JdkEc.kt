@@ -224,7 +224,7 @@ internal sealed class JdkEc<PublicK : EC.PublicKey, PrivateK : EC.PrivateKey<Pub
                 curve = curve,
                 orderSize = fieldSize,
                 publicKey = rawPublicKey,
-                privateKey = key.s.toByteArray()
+                privateKey = key.s.toByteArray().trimLeadingZeros()
             )
         }
     }
