@@ -125,7 +125,9 @@ internal sealed class JdkEc<PublicK : EC.PublicKey, PrivateK : EC.PrivateKey<Pub
         private fun decodeFromJwk(bytes: ByteArray): PrivateK {
             val parameters = parameters.getParameterSpec(ECParameterSpec::class.java)
             val ecRawKey = JsonWebKeys.decodeEcPrivateKey(curve, parameters.curveOrderSize(), bytes)
-            val privateKey = decodeRaw(ECPrivateKeySpec(BigInteger(1, ecRawKey.privateKey), parameters))
+            val privateKey = decodeRaw(
+                ECPrivateKeySpec(BigInteger(1, ecRawKey.privateKey), parameters)
+            )
             val publicKey = EcPublicKeyDecoder(curve).decodeFromRaw(ecRawKey.publicKey)
             return wrapPrivateKey(privateKey, curve, publicKey)
         }
@@ -205,12 +207,7 @@ internal sealed class JdkEc<PublicK : EC.PublicKey, PrivateK : EC.PrivateKey<Pub
         final override fun encodeToByteArrayBlocking(format: EC.PrivateKey.Format): ByteArray = when (format) {
             EC.PrivateKey.Format.JWK -> encodeToJwk()
             EC.PrivateKey.Format.DER      -> encodeToDer()
-            EC.PrivateKey.Format.RAW      -> {
-                key as ECPrivateKey
-                val fieldSize = key.params.curveOrderSize()
-                val secret = key.s.toByteArray().trimLeadingZeros()
-                secret.copyInto(ByteArray(fieldSize), fieldSize - secret.size)
-            }
+            EC.PrivateKey.Format.RAW -> (key as ECPrivateKey).secretToByteArray()
             EC.PrivateKey.Format.PEM      -> wrapPem(PemLabel.PrivateKey, encodeToDer())
             EC.PrivateKey.Format.DER.SEC1 -> convertEcPrivateKeyFromPkcs8ToSec1(encodeToDer())
             EC.PrivateKey.Format.PEM.SEC1 -> wrapPem(PemLabel.EcPrivateKey, convertEcPrivateKeyFromPkcs8ToSec1(encodeToDer()))
@@ -224,8 +221,26 @@ internal sealed class JdkEc<PublicK : EC.PublicKey, PrivateK : EC.PrivateKey<Pub
                 curve = curve,
                 orderSize = fieldSize,
                 publicKey = rawPublicKey,
-                privateKey = key.s.toByteArray().trimLeadingZeros()
+                privateKey = key.secretToByteArray()
             )
+        }
+
+        private fun ECPrivateKey.secretToByteArray(): ByteArray {
+            val fieldSize = params.curveOrderSize()
+            val secret = s.toByteArray()
+            val firstNonZeroIndex = secret.indexOfFirst { it != 0.toByte() }
+            return when (firstNonZeroIndex) {
+                -1 if secret.size == fieldSize -> secret
+                -1                             -> secret.copyInto(
+                    destination = ByteArray(fieldSize),
+                    destinationOffset = fieldSize - secret.size,
+                )
+                else                           -> secret.copyInto(
+                    destination = ByteArray(fieldSize),
+                    destinationOffset = fieldSize - secret.size + firstNonZeroIndex,
+                    startIndex = firstNonZeroIndex
+                )
+            }
         }
     }
 }
